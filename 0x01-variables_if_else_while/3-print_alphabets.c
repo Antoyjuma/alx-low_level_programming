@@ -1,6 +1,6 @@
 #include <stdio.h>
 /**
- * main - print alphabet in lowercase and uppercase
+ * main -  prints the alphabet in lowercase, and then in uppercase
  * Return: Always 0 (Success)
  *
  */
@@ -13,7 +13,7 @@ int main(void)
 	{
 		putchar (x, y);
 	}
-	putchar('\n');
+	putchar ('\n');
 
 	return (0);
 }
