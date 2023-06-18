@@ -11,7 +11,8 @@ int main(void)
 	for (e = '0'; e <= '9'; e++)
 		putchar(e);
 	if (e != '9')
-		putchar (',');
-	putchar (' ');
+		putchar(", ");
+	putchar(' ');
+	putchar('\n');
 	return (0);
 }
