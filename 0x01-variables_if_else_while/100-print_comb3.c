@@ -3,7 +3,7 @@
  * main -  prints all possible different combinations of two digits
  * Return: Alwyas 0 (Success)
  *
- */
+ */i
 int main(void)
 {
 	int a;
@@ -24,5 +24,6 @@ int main(void)
 			putchar(' ');
 		}
 		}
+	putchar('\n');
 	return (0);
 }
