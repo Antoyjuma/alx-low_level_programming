@@ -7,8 +7,11 @@
 *@n: Number of elements of the array to be printed
 *@a: array
 *Return: void
+*
 */
-void print_array(int *a, int n);
+
+void print_array(int *a, int n)
+
 {
 	int j;
 
