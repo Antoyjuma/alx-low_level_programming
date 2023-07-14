@@ -2,24 +2,24 @@
 #include <stdlib.h>
 
 /**
- * _print - moves a string one place to the left and prints the string
- * @str: string to move.
+ * _print - moves a string one place to the left and prints the string,,
+ *@str: string to move..
  * @l: size of string.
  *
- * Return: void.
+ * Return: void
  */
 void _print(char *str, int l)
 {
-	int j, k;
+	int k, j;
 
-	j = k = 0;
-	while (j < l)
+	k = j = 0;
+	while (k < l)
 	{
-		if (str[j] != '0')
-			k = 1;
-		if (k || j == l - 1)
-			_putchar(str[i]);
-		j++;
+		if (str[k] != '0')
+			j = 1;
+		if (j || k == l - 1)
+			_putchar(str[k]);
+	k++;
 	}
 
 	_putchar('\n');
