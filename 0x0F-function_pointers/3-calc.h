@@ -5,10 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 /**
-* struct op - A struct op.
-* @op: The operator.
-* @f: The associated function.
-* Description: Longer description
+* struct op - Short description,,
+* @op: the operator to be examined,
+* @f: pointer to function.
+*
+* Description: Longer description.
 */
 typedef struct op
 {
