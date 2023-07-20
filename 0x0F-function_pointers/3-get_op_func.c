@@ -1,11 +1,10 @@
 #include"3-calc.h"
 /**
-* get_op_func - Selects the correct function to perform
-* the operation asked by the user.
-* @s: The operator passed as argument.
-*
-* Return: A pointer to the function corresponding
-* to the operator given as a parameter.
+* get_op_func - get the operator and redirect to the func.
+* @s: the operator.
+* a blank line.
+* Description: get the operator and redirect to the func.
+* Return: return null or the function to do.
 */
 
 int (*get_op_func(char *s))(int, int)
