@@ -1,57 +1,52 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_set - This func will update an element in a hash table.
+ * hash_table_set - function that adds an element to the hash table
+ * @ht: pointer to hash table
+ * @key: key to add the element
+ * @value: value to add the element
  *
- * @ht: Just simply a pointer to the hash table.
- *
- * @key: Represents key to update and can't be empty string.
- *
- * @value: Represents value associated with key.
- *
- * Return: 0(FAILURE) else 1(SUCCESS)
- *
+ * Return: 1 if it succeeded, 0 otherwise
  */
 
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *new;
-	char *value_copy;
-	unsigned long int index, eye;
+	unsigned long int index = 0;
+	char *valuecopy, *keycopy;
+	hash_node_t  *bucket, *new_node;
 
-	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+	if (!ht || !key || !*key || !value)
 		return (0);
 
-	value_copy = strdup(value);
-	if (value_copy == NULL)
+	valuecopy = strdup(value);
+	if (!valuecopy)
 		return (0);
 
 	index = key_index((const unsigned char *)key, ht->size);
-	for (eye = index; ht->array[eye]; eye++)
+	bucket = ht->array[index];
+
+	while (bucket)
 	{
-		if (strcmp(ht->array[eye]->key, key) == 0)
+		if (!strcmp(key, bucket->key))
 		{
-			free(ht->array[eye]->value);
-			ht->array[eye]->value = value_copy;
+			free(bucket->value);
+			bucket->value = valuecopy;
 			return (1);
 		}
+		bucket = bucket->next;
 	}
-
-	new = malloc(sizeof(hash_node_t));
-	if (new == NULL)
+	new_node = calloc(1, sizeof(hash_node_t));
+	if (new_node == NULL)
 	{
-		free(value_copy);
+		free(valuecopy);
 		return (0);
 	}
-	new->key = strdup(key);
-	if (new->key == NULL)
-	{
-		free(new);
+	keycopy = strdup(key);
+	if (!keycopy)
 		return (0);
-	}
-	new->value = value_copy;
-	new->next = ht->array[index];
-	ht->array[index] = new;
-
+	new_node->key = keycopy;
+	new_node->value = valuecopy;
+	new_node->next = ht->array[index];
+	ht->array[index] = new_node;
 	return (1);
 }
