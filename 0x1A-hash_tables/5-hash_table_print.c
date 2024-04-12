@@ -1,35 +1,42 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_print - prints a hash table
- * @ht: the hash table to print
- * print the key/value in the order that they appear in the array of hash table
+ * hash_table_print - This func will print a hash table
+ *
+ * @ht: Simply a pointer to the hash table
+ *
+ * Description: value pairs are printed in the
+ * way or order in which they appear in the array
+ *
  */
 
 void hash_table_print(const hash_table_t *ht)
 {
-	hash_node_t *tmp_node = NULL;
-	char *comma_flag = "";
-	unsigned long int index = 0;
+	hash_node_t *node;
+	unsigned long int eye;
+	unsigned char comma_flag = 0;
 
-	if (ht)
+	if (ht == NULL)
+		return;
+
+	printf("{");
+	for (eye = 0; eye < ht->size; eye++)
 	{
-		printf("{");
-		while (index < ht->size)
+		if (ht->array[eye] != NULL)
 		{
-			tmp_node = ht->array[index];
+			if (comma_flag == 1)
+				printf(", ");
 
-			while (tmp_node)
+			node = ht->array[eye];
+			while (node != NULL)
 			{
-				printf("%s", comma_flag);
-				comma_flag = ", ";
-
-				if (tmp_node->key)
-					printf("'%s': '%s'", tmp_node->key, tmp_node->value);
-				tmp_node = tmp_node->next;
+				printf("'%s': '%s'", node->key, node->value);
+				node = node->next;
+				if (node != NULL)
+					printf(", ");
 			}
-			index++;
+			comma_flag = 1;
 		}
-		printf("}\n");
 	}
+	printf("}\n");
 }

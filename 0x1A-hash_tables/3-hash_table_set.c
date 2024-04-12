@@ -1,45 +1,46 @@
 #include "hash_tables.h"
-#include <string.h>
 
 /**
- * hash_table_set - adds an element to the hash table
- * @ht: hash table you want to add or update the key/value to
- * @key: the key (can not be an empty string)
- * @value: value associated with the key
- * value must be duplicated. value can be an empty string
+ * hash_table_set - This func will update an element in a hash table.
  *
- * Return: 1 if it succeeded || 0 otherwise
- * In case of collision, add the new node at the beginning of the list
+ * @ht: Just simply a pointer to the hash table.
+ *
+ * @key: Represents key to update and can't be empty string.
+ *
+ * @value: Represents value associated with key.
+ *
+ * Return: 0(FAILURE) else 1(SUCCESS)
+ *
  */
 
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	hash_node_t *new;
-	unsigned long int i, index;
-	char *new_value;
+	char *value_copy;
+	unsigned long int index, eye;
 
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
 
-	new_value = strdup(value);
-	if (new_value == NULL)
+	value_copy = strdup(value);
+	if (value_copy == NULL)
 		return (0);
 
 	index = key_index((const unsigned char *)key, ht->size);
-
-	for (i = index; ht->array[i]; i++)
+	for (eye = index; ht->array[eye]; eye++)
 	{
-		if (strcmp(ht->array[i]->key, key) == 0)
+		if (strcmp(ht->array[eye]->key, key) == 0)
 		{
-			free(ht->array[i]->value);
-			ht->array[i]->value = new_value;
+			free(ht->array[eye]->value);
+			ht->array[eye]->value = value_copy;
 			return (1);
 		}
 	}
+
 	new = malloc(sizeof(hash_node_t));
 	if (new == NULL)
 	{
-		free(new_value);
+		free(value_copy);
 		return (0);
 	}
 	new->key = strdup(key);
@@ -48,8 +49,9 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		free(new);
 		return (0);
 	}
-	new->value = new_value;
+	new->value = value_copy;
 	new->next = ht->array[index];
 	ht->array[index] = new;
+
 	return (1);
 }
